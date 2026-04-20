@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AgeWithEase</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+
+body{
+margin:0;
+font-family:'Poppins',sans-serif;
+background:linear-gradient(135deg,#bfa2ff,#8e6ef7);
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+color:white;
+overflow:hidden;
+}
+
+/* Glass Card */
+.container{
+backdrop-filter:blur(20px);
+background:rgba(255,255,255,0.1);
+padding:50px;
+border-radius:20px;
+text-align:center;
+box-shadow:0 10px 40px rgba(0,0,0,0.2);
+animation:fadeIn 1s ease;
+}
+
+/* Title */
+h1{
+font-size:42px;
+margin-bottom:10px;
+letter-spacing:1px;
+}
+
+/* Subtitle */
+p{
+font-size:18px;
+opacity:0.9;
+margin-bottom:30px;
+}
+
+/* Button */
+button{
+padding:15px 35px;
+font-size:18px;
+border:none;
+border-radius:30px;
+background:linear-gradient(45deg,#ffffff,#e0d4ff);
+color:#6a4cff;
+cursor:pointer;
+transition:0.3s;
+box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
+
+button:hover{
+transform:translateY(-3px) scale(1.05);
+box-shadow:0 8px 25px rgba(0,0,0,0.3);
+}
+
+/* Background Glow */
+body::before{
+content:"";
+position:absolute;
+width:400px;
+height:400px;
+background:rgba(255,255,255,0.2);
+filter:blur(120px);
+top:-100px;
+left:-100px;
+}
+
+body::after{
+content:"";
+position:absolute;
+width:400px;
+height:400px;
+background:rgba(255,255,255,0.2);
+filter:blur(120px);
+bottom:-100px;
+right:-100px;
+}
+
+/* Animation */
+@keyframes fadeIn{
+from{opacity:0; transform:translateY(30px);}
+to{opacity:1; transform:translateY(0);}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🌸 AgeWithEase</h1>
+<p>Your AI Companion for Elder Care & Wellness</p>
+
+<button onclick="goToLogin()">Get Started</button>
+
+</div>
+
+<script>
+function goToLogin(){
+window.location.href="login.html";
+}
+</script>
+
+</body>
+</html>

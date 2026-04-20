@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Daily Care</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+margin:0;
+font-family:'Poppins',sans-serif;
+background:linear-gradient(135deg,#f3ecff,#e0d4ff);
+}
+
+/* SIDEBAR */
+.sidebar{
+width:240px;
+height:100vh;
+background:linear-gradient(180deg,#bfa2ff,#8e6ef7);
+color:white;
+padding-top:30px;
+position:fixed;
+box-shadow:5px 0 20px rgba(0,0,0,0.1);
+}
+
+.sidebar h2{
+text-align:center;
+margin-bottom:30px;
+}
+
+.sidebar a{
+display:block;
+color:white;
+text-decoration:none;
+padding:15px 25px;
+transition:0.3s;
+}
+
+.sidebar a:hover{
+background:rgba(255,255,255,0.2);
+padding-left:35px;
+}
+
+/* MAIN */
+.main-content{
+margin-left:260px;
+padding:35px;
+}
+
+/* TITLE */
+.section-title{
+margin-bottom:10px;
+color:#6a4cff;
+}
+
+/* GRID */
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:20px;
+margin-bottom:30px;
+}
+
+/* CARD */
+.card{
+background:rgba(255,255,255,0.8);
+backdrop-filter:blur(10px);
+padding:20px;
+border-radius:16px;
+box-shadow:0 8px 20px rgba(0,0,0,0.1);
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+}
+
+/* BUTTON */
+button{
+width:100%;
+padding:12px;
+margin-top:10px;
+border:none;
+border-radius:10px;
+background:linear-gradient(135deg,#8e6ef7,#6a4cff);
+color:white;
+font-size:14px;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.05);
+}
+
+.done{
+background:#4caf50 !important;
+}
+
+/* INPUT */
+input,select{
+width:100%;
+padding:10px;
+margin-top:10px;
+border-radius:10px;
+border:1px solid #ccc;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<h2>🌸 AgeWithEase</h2>
+
+<a href="dashboard.html">🏠 Dashboard</a>
+<a href="profile.html">👤 Profile</a>
+<a href="routine.html">⏰ Daily Care</a>
+<a href="assistant.html">🤖 AI Assistant</a>
+<a href="caregiver.html">👩‍⚕ Caregiver</a>
+<a href="login.html">🚪 Logout</a>
+
+</div>
+
+<div class="main-content">
+
+<h2>🌿 Daily Care Panel</h2>
+
+<!-- ROUTINE -->
+
+<h3 class="section-title">⏰ Routine</h3>
+
+<div class="grid">
+
+<div class="card">
+<button id="wake" onclick="markDone('wake',this)">☀ Wake Up</button>
+<button id="breakfast" onclick="markDone('breakfast',this)">🍳 Breakfast</button>
+<button id="lunch" onclick="markDone('lunch',this)">🍱 Lunch</button>
+<button id="dinner" onclick="markDone('dinner',this)">🌙 Dinner</button>
+</div>
+
+</div>
+
+<!-- HEALTH -->
+
+<h3 class="section-title">💊 Health</h3>
+
+<div class="grid">
+
+<div class="card">
+<h3>Medicine</h3>
+<input type="text" id="medName" placeholder="Medicine Name">
+<input type="time" id="medTime">
+<button onclick="saveMedicine()">Save Medicine</button>
+</div>
+
+<div class="card">
+<h3>Water Intake</h3>
+<input type="number" id="water" placeholder="Glasses">
+<button onclick="saveWater()">Save</button>
+</div>
+
+<div class="card">
+<h3>Mood</h3>
+<select id="moodSelect">
+<option value="">Select Mood</option>
+<option>Happy</option>
+<option>Neutral</option>
+<option>Low</option>
+</select>
+<button onclick="saveMood()">Save Mood</button>
+</div>
+
+</div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Caregiver Dashboard</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+margin:0;
+font-family:'Poppins',sans-serif;
+background:linear-gradient(135deg,#f3ecff,#e0d4ff);
+}
+
+/* SIDEBAR */
+.sidebar{
+width:240px;
+height:100vh;
+background:linear-gradient(180deg,#bfa2ff,#8e6ef7);
+color:white;
+padding-top:30px;
+position:fixed;
+box-shadow:5px 0 20px rgba(0,0,0,0.1);
+}
+
+.sidebar h2{
+text-align:center;
+margin-bottom:30px;
+}
+
+.sidebar a{
+display:block;
+color:white;
+text-decoration:none;
+padding:15px 25px;
+}
+
+/* MAIN */
+.main-content{
+margin-left:260px;
+padding:40px;
+}
+
+/* GRID */
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:20px;
+}
+
+/* CARD */
+.card{
+background:rgba(255,255,255,0.8);
+backdrop-filter:blur(10px);
+padding:25px;
+border-radius:16px;
+box-shadow:0 8px 20px rgba(0,0,0,0.1);
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+}
+
+.card h3{
+margin-top:0;
+color:#6a4cff;
+}
+
+.status{
+font-size:16px;
+margin-top:10px;
+}
+
+.alert{
+background:#ffe4e4;
+padding:15px;
+border-radius:10px;
+color:#d8000c;
+font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<h2>🌸 AgeWithEase</h2>
+
+<a href="dashboard.html">🏠 Dashboard</a>
+<a href="profile.html">👤 Profile</a>
+<a href="routine.html">⏰ Daily Care</a>
+<a href="assistant.html">🤖 AI Assistant</a>
+<a href="caregiver.html">👩‍⚕ Caregiver</a>
+<a href="login.html">🚪 Logout</a>
+
+</div>
+
+<div class="main-content">
+
+<h2>👩‍⚕ Caregiver Monitoring</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>💊 Medicine</h3>
+<p class="status" id="careMedicine"></p>
+</div>
+
+<div class="card">
+<h3>😊 Mood</h3>
+<p class="status" id="careMood"></p>
+</div>
+
+<div class="card">
+<h3>💧 Water</h3>
+<p class="status" id="careWater"></p>
+</div>
+
+<div class="card">
+<h3>⚠ Alerts</h3>
+<p class="alert" id="careAlert"></p>
+</div>
+
+<div class="card">
+<h3>📊 Routine Status</h3>
+<p class="status" id="routineStatus"></p>
+<p class="status" id="careRoutine"></p>
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+// SAME LOGIC (UNCHANGED)
+
+function loadCaregiverData(){
+
+let med=JSON.parse(localStorage.getItem("medicine"));
+if(med){
+document.getElementById("careMedicine").innerText=med.name+" at "+med.time;
+}else{
+document.getElementById("careMedicine").innerText="No data";
+}
+
+let mood=localStorage.getItem("mood");
+document.getElementById("careMood").innerText=mood || "No data";
+
+let water=localStorage.getItem("water");
+document.getElementById("careWater").innerText=(water||0)+" glasses";
+
+let tasks=["wake","breakfast","lunch","dinner"];
+let done=tasks.filter(t=>localStorage.getItem(t)==="done").length;
+document.getElementById("routineStatus").innerText=done+"/4 tasks completed";
+
+if(done<2){
+document.getElementById("careAlert").innerText="Low activity today!";
+}else{
+document.getElementById("careAlert").innerText="All good";
+}
+
+let now=new Date().toTimeString().slice(0,5);
+if(med && now > med.time){
+document.getElementById("careAlert").innerText="⚠ Medicine Missed!";
+}
+
+}
+
+async function loadRoutine(){
+try{
+let res=await fetch("http://localhost:5000/get-routine");
+let data=await res.json();
+
+if(data.length>0){
+let tasks=data.map(d=>d.task).join(", ");
+document.getElementById("careRoutine").innerText="Recent Activity: "+tasks;
+}else{
+document.getElementById("careRoutine").innerText="No recent activity";
+}
+
+}catch(err){
+console.log(err);
+}
+}
+
+window.onload=function(){
+loadCaregiverData();
+loadRoutine();
+}
+
+</script>
+
+</body>
+</html>
