@@ -13,7 +13,7 @@ mongoose.connect("mongodb://admin:2005@ac-lpfrfbg-shard-00-00.ypwga87.mongodb.ne
 .catch(err => console.log(err));
 
 // import model
-const Profile = require("./models/Profile");
+const Profile = require("../models/Profile");
 
 // test route
 app.get("/", (req, res) => {
